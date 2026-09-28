@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crops & Products — Farm & Agriculture</title>
+  <meta name="description" content="Browse our premium agriculture catalogue: cereals, vegetables, fruits, pulses, certified organic and seasonal crops with harvest windows and traceability.">
+  <meta property="og:title" content="Crops & Products — Farm & Agriculture">
+  <meta property="og:description" content="Browse our premium agriculture catalogue: cereals, vegetables, fruits, pulses, certified organic and seasonal crops with harvest windows and traceability.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Playfair+Display:wght@500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- ===================== INTERNAL STYLES ===================== -->
+  <style>
+    /* ============ DESIGN TOKENS ============ */
+    :root{
+      --forest:#16352A; --emerald:#1F4A38; --moss:#58724D; --sage:#879B78;
+      --sand:#D8C7A3; --brown:#765B43; --terracotta:#B9684E;
+      --ivory:#F4F0E6; --beige:#E8E1D2; --charcoal:#20251F; --gold:#C7A55B;
+      --line:rgba(32,37,31,.14);
+      --line-light:rgba(244,240,230,.16);
+      --shadow:0 18px 40px -24px rgba(22,53,42,.55);
+      --shadow-lg:0 30px 70px -30px rgba(22,53,42,.65);
+      --serif:"Playfair Display",Georgia,serif;
+      --sans:"Manrope","Segoe UI",Arial,"Noto Color Emoji","Apple Color Emoji","Segoe UI Emoji",sans-serif;
+      --r:6px;
+      --ease:cubic-bezier(.22,.7,.3,1);
+      --wrap:1220px;
+    }
+
+    /* ============ RESET ============ */
+    *,*::before,*::after{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0; background:var(--ivory); color:var(--charcoal);
+      font-family:var(--sans); font-size:16px; line-height:1.7;
+      -webkit-font-smoothing:antialiased; overflow-x:hidden;
+    }
+    img{max-width:100%; display:block;}
+    a{color:inherit; text-decoration:none;}
+    button{font:inherit; cursor:pointer;}
+    h1,h2,h3,h4{font-family:var(--serif); font-weight:600; line-height:1.15; margin:0 0 .5em; letter-spacing:-.01em;}
+    h1{font-size:clamp(2.4rem,6vw,4.4rem);}
+    h2{font-size:clamp(1.9rem,4vw,3rem);}
+    h3{font-size:clamp(1.2rem,2vw,1.5rem);}
+    p{margin:0 0 1rem;}
+    :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+    /* ============ LAYOUT HELPERS ============ */
+    .wrap{width:min(100% - 2.5rem, var(--wrap)); margin-inline:auto;}
+    .section{padding:clamp(4rem,9vw,7.5rem) 0;}
+    .section--dark{background:var(--forest); color:var(--ivory);}
+    .section--deep{background:linear-gradient(160deg,var(--forest),var(--charcoal)); color:var(--ivory);}
+    .section--beige{background:var(--beige);}
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:.6rem; text-transform:uppercase;
+      letter-spacing:.22em; font-size:.72rem; font-weight:600; color:var(--moss); margin-bottom:1rem;
+    }
+    .eyebrow::before{content:""; width:28px; height:1px; background:var(--gold);}
+    .section--dark .eyebrow,.section--deep .eyebrow{color:var(--sand);}
+    .lead{font-size:1.05rem; color:rgba(32,37,31,.72); max-width:62ch;}
+    .section--dark .lead,.section--deep .lead{color:rgba(244,240,230,.76);}
+    .head{max-width:70ch; margin-bottom:3rem;}
+    .grid{display:grid; gap:1.25rem;}
+    .g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));}
+    .g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));}
+    .g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));}
+
+    /* ============ BUTTONS ============ */
+    .btn{
+      --bg:var(--emerald); --fg:var(--ivory);
+      position:relative; display:inline-flex; align-items:center; gap:.65rem;
+      padding:.95rem 1.6rem; border:1px solid transparent; border-radius:var(--r);
+      background:var(--bg); color:var(--fg); font-weight:600; font-size:.92rem;
+      letter-spacing:.02em; overflow:hidden; transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease);
+    }
+    .btn .arrow{transition:transform .35s var(--ease);}
+    .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow);}
+    .btn:hover .arrow{transform:translate(3px,-3px);}
+    .btn--gold{--bg:var(--gold); --fg:#20251F;}
+    .btn--ghost{--bg:transparent; --fg:currentColor; border-color:currentColor;}
+    .btn--ghost:hover{background:rgba(199,165,91,.18);}
+    .btn--block{width:100%; justify-content:center;}
+
+    /* ============ CARDS ============ */
+    .card{
+      background:#fff; border:1px solid var(--line); border-radius:var(--r);
+      padding:1.75rem; transition:transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s var(--ease), background .4s var(--ease);
+    }
+    .card:hover{transform:translateY(-6px); box-shadow:var(--shadow); border-color:rgba(31,74,56,.35);}
+    .section--dark .card,.section--deep .card{
+      background:rgba(244,240,230,.05); border-color:var(--line-light); color:var(--ivory);
+      backdrop-filter:blur(8px);
+    }
+    .section--dark .card:hover,.section--deep .card:hover{background:rgba(244,240,230,.09); border-color:rgba(199,165,91,.45);}
+    .glass{
+      background:rgba(22,53,42,.42); backdrop-filter:blur(14px);
+      border:1px solid rgba(244,240,230,.18); border-radius:var(--r); color:var(--ivory);
+      box-shadow:var(--shadow-lg);
+    }
+    .num{font-family:var(--serif); font-size:.95rem; color:var(--gold); letter-spacing:.1em;}
+    .ico{
+      width:46px; height:46px; display:grid; place-items:center; border-radius:var(--r);
+      background:rgba(31,74,56,.1); color:var(--emerald); font-size:1.2rem; margin-bottom:1rem;
+      transition:transform .4s var(--ease), background .4s var(--ease), color .4s var(--ease);
+    }
+    .card:hover .ico{transform:translateY(-3px) rotate(-4deg); background:var(--emerald); color:var(--ivory);}
+    .section--dark .ico,.section--deep .ico{background:rgba(199,165,91,.16); color:var(--sand);}
+    .muted{color:rgba(32,37,31,.68); font-size:.95rem;}
+    .section--dark .muted,.section--deep .muted,.glass .muted,.sidebar .muted,.dash-user .muted{color:rgba(244,240,230,.72);}
+
+    /* ============ MEDIA ============ */
+    .media{position:relative; overflow:hidden; border-radius:var(--r); border:1px solid var(--line);}
+    .media img{width:100%; height:100%; object-fit:cover; transition:transform .8s var(--ease);}
+    .media:hover img{transform:scale(1.06);}
+    .media--tall img{height:100%; min-height:420px;}
+
+    /* ============ HEADER ============ */
+    .site-header{
+      position:fixed; inset:0 0 auto 0; z-index:80; padding:1rem 0;
+      transition:background .4s var(--ease), box-shadow .4s var(--ease), padding .4s var(--ease), border-color .4s var(--ease);
+      border-bottom:1px solid transparent; background:linear-gradient(180deg,rgba(22,53,42,.55),transparent);
+    }
+    .site-header.scrolled{
+      background:rgba(22,53,42,.92); backdrop-filter:blur(14px);
+      border-bottom-color:rgba(199,165,91,.3); box-shadow:0 12px 30px -24px #000; padding:.55rem 0;
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:1.5rem;}
+    .brand{display:flex; align-items:center; gap:.7rem; color:var(--ivory);}
+    .logo{display:grid; place-items:center;}
+    .logo-text{display:flex; flex-direction:column; line-height:1.05; font-size:.95rem; letter-spacing:.04em;}
+    .logo-text strong{font-family:var(--serif); font-weight:600;}
+    .logo-text em{display:none;}
+    .logo-text small{font-size:.6rem; letter-spacing:.24em; text-transform:uppercase; opacity:.7;}
+    .nav-links{display:flex; gap:1.9rem; list-style:none; margin:0; padding:0;}
+    .nav-links a{
+      position:relative; color:rgba(244,240,230,.88); font-size:.88rem; font-weight:500;
+      letter-spacing:.04em; padding:.35rem 0; transition:color .3s var(--ease);
+    }
+    .nav-links a::after{
+      content:""; position:absolute; left:0; bottom:0; height:1px; width:0; background:var(--gold);
+      transition:width .35s var(--ease);
+    }
+    .nav-links a:hover,.nav-links a[aria-current="page"]{color:#fff;}
+    .nav-links a:hover::after,.nav-links a[aria-current="page"]::after{width:100%;}
+    .nav-cta{
+      border:1px solid rgba(199,165,91,.6); color:var(--ivory); padding:.6rem 1.35rem; border-radius:var(--r);
+      font-size:.82rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+      transition:background .35s var(--ease), color .35s var(--ease), transform .35s var(--ease);
+    }
+    .nav-cta:hover{background:var(--gold); color:#20251F; transform:translateY(-2px);}
+    .burger,.menu-close{
+      display:none; background:transparent; border:1px solid rgba(244,240,230,.4);
+      color:var(--ivory); width:44px; height:44px; border-radius:var(--r);
+      align-items:center; justify-content:center; transition:border-color .3s var(--ease), background .3s var(--ease);
+    }
+    .burger:hover,.menu-close:hover{background:rgba(199,165,91,.25); border-color:var(--gold);}
+    .burger span{display:block; width:20px; height:2px; background:currentColor; box-shadow:0 6px 0 currentColor,0 -6px 0 currentColor;}
+
+    /* Mobile drawer */
+    .mobile-menu{
+      position:fixed; inset:0; z-index:95; display:grid; grid-template-rows:auto 1fr;
+      background:linear-gradient(170deg,var(--forest),var(--charcoal));
+      transform:translateX(100%); transition:transform .45s var(--ease); visibility:hidden;
+    }
+    .mobile-menu.open{transform:translateX(0); visibility:visible;}
+    .mobile-menu .mm-top{display:flex; align-items:center; justify-content:space-between; padding:1.2rem 1.25rem; border-bottom:1px solid var(--line-light);}
+    .mobile-menu nav{padding:2rem 1.25rem; display:flex; flex-direction:column; gap:.35rem;}
+    .mobile-menu nav a{
+      color:var(--ivory); font-family:var(--serif); font-size:1.5rem; padding:.7rem 0;
+      border-bottom:1px solid var(--line-light); transition:padding-left .3s var(--ease), color .3s var(--ease);
+    }
+    .mobile-menu nav a:hover{padding-left:.8rem; color:var(--gold);}
+    .mobile-menu .btn{margin-top:1.6rem;}
+    .mobile-menu nav a.btn--gold{color:#20251F; border-bottom:0;}
+    .mobile-menu nav a.btn--gold:hover{padding-left:0; color:#20251F;}
+
+    /* ============ FOOTER ============ */
+    .site-footer{background:linear-gradient(180deg,var(--charcoal),#161a15); color:rgba(244,240,230,.8); padding:4.5rem 0 1.5rem;}
+    .footer-grid{display:grid; gap:2.5rem; grid-template-columns:1.4fr 1fr 1fr 1.2fr;}
+    .site-footer h4{color:var(--ivory); font-size:1rem; letter-spacing:.06em; margin-bottom:1.1rem;}
+    .site-footer ul{list-style:none; margin:0; padding:0; display:grid; gap:.6rem; font-size:.92rem;}
+    .site-footer a{transition:color .3s var(--ease), padding-left .3s var(--ease);}
+    .site-footer li a:hover{color:var(--gold); padding-left:.35rem;}
+    .site-footer .brand{margin-bottom:1rem;}
+    .socials{display:flex; gap:.6rem; margin-top:1.2rem;}
+    .socials a{
+      width:40px; height:40px; display:grid; place-items:center; border:1px solid var(--line-light);
+      border-radius:var(--r); transition:transform .3s var(--ease), background .3s var(--ease), border-color .3s var(--ease);
+    }
+    .socials a:hover{transform:translateY(-3px) scale(1.05); background:rgba(199,165,91,.2); border-color:var(--gold);}
+    .socials svg{width:17px; height:17px; fill:currentColor;}
+    .footer-bottom{
+      margin-top:3rem; padding-top:1.4rem; border-top:1px solid var(--line-light);
+      display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; font-size:.82rem;
+    }
+
+    /* ============ REVEAL ANIMATION ============ */
+    .reveal{opacity:0; transform:translateY(26px); transition:opacity .8s var(--ease), transform .8s var(--ease);}
+    .reveal.visible{opacity:1; transform:none;}
+
+    /* ============ TOAST ============ */
+    .toast-stack{position:fixed; right:1rem; bottom:1rem; z-index:120; display:grid; gap:.6rem; max-width:320px;}
+    .toast{
+      background:var(--forest); color:var(--ivory); border:1px solid rgba(199,165,91,.5);
+      border-radius:var(--r); padding:.85rem 1.1rem; font-size:.9rem; box-shadow:var(--shadow-lg);
+      opacity:0; transform:translateY(12px); transition:opacity .35s var(--ease), transform .35s var(--ease);
+    }
+    .toast.show{opacity:1; transform:none;}
+    .toast.error{border-color:rgba(185,104,78,.8);}
+
+    /* ============ FORMS ============ */
+    .field{margin-bottom:1.1rem;}
+    .field label{display:block; font-size:.8rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; margin-bottom:.45rem;}
+    .field input,.field textarea,.field select{
+      width:100%; padding:.85rem 1rem; border:1px solid var(--line); border-radius:var(--r);
+      background:#fff; font:inherit; color:inherit; transition:border-color .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    .field textarea{min-height:140px; resize:vertical;}
+    .field input:focus,.field textarea:focus{border-color:var(--emerald); box-shadow:0 0 0 3px rgba(31,74,56,.12); outline:none;}
+    .field .err{display:block; min-height:1.1rem; font-size:.78rem; color:var(--terracotta); margin-top:.3rem;}
+    .field.invalid input,.field.invalid textarea{border-color:var(--terracotta); background:rgba(185,104,78,.05);}
+
+    /* ============ PAGE HERO (inner pages) ============ */
+    .page-hero{position:relative; padding:12rem 0 5rem; color:var(--ivory); overflow:hidden;}
+    .page-hero img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+    .page-hero::after{content:""; position:absolute; inset:0; background:linear-gradient(120deg,rgba(22,53,42,.92),rgba(32,37,31,.55));}
+    .page-hero .wrap{position:relative; z-index:2;}
+    .crumbs{font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(244,240,230,.7);}
+    .crumbs a:hover{color:var(--gold);}
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width:980px){
+      .footer-grid{grid-template-columns:repeat(2,1fr);}
+    }
+    @media (max-width:860px){
+      .nav-links,.nav-cta{display:none;}
+      .burger{display:inline-flex;}
+      .menu-close{display:inline-flex;}
+      .page-hero{padding:9rem 0 4rem;}
+    }
+    @media (max-width:560px){
+      .footer-grid{grid-template-columns:1fr;}
+      .btn{width:100%; justify-content:center;}
+    }
+    @media (prefers-reduced-motion:reduce){
+      *{animation-duration:.001ms !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+      .reveal{opacity:1; transform:none;}
+    }
+
+    /* ---- shared page-level blocks ---- */
+    .svc .more,.crop-card .more{font-size:.82rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--emerald); display:inline-flex; gap:.45rem;}
+    .svc:hover .more .arrow,.crop-card:hover .more .arrow{transform:translateX(5px);}
+    .svc .more .arrow,.crop-card .more .arrow{transition:transform .35s var(--ease);}
+    .crop-card{padding:0; overflow:hidden;}
+    .crop-card .media{border:0; border-radius:0;}
+    .crop-card .media img{height:230px;}
+    .crop-body{padding:1.5rem;}
+    .tag{display:inline-block; font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--brown); border:1px solid var(--line); padding:.25rem .6rem; border-radius:4px; margin-bottom:.8rem;}
+    .crop-foot{display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-top:1.2rem; padding-top:1rem; border-top:1px solid var(--line); font-size:.8rem; color:rgba(32,37,31,.6);}
+    .split{display:grid; gap:2.5rem; grid-template-columns:1fr 1fr; align-items:stretch;}
+    @media (max-width:900px){ .split{grid-template-columns:1fr;} }
+    .stat{padding:1.6rem;}
+    .stat b{display:block; font-family:var(--serif); font-size:clamp(2rem,4vw,2.9rem); color:var(--gold); line-height:1;}
+    .stat span{font-size:.85rem; letter-spacing:.14em; text-transform:uppercase;}
+    .bar{height:6px; background:rgba(244,240,230,.16); border-radius:99px; overflow:hidden; margin-top:.6rem;}
+    .bar i{display:block; height:100%; background:linear-gradient(90deg,var(--sage),var(--gold)); width:0; transition:width 1.6s var(--ease);}
+    .cta-band{position:relative; overflow:hidden; color:var(--ivory);}
+    .cta-band > img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+    .cta-band::after{content:""; position:absolute; inset:0; background:linear-gradient(120deg,rgba(22,53,42,.9),rgba(32,37,31,.45));}
+    .cta-band .wrap{position:relative; z-index:2; padding:clamp(4rem,8vw,7rem) 0;}
+    .cta-panel{max-width:640px; padding:2.5rem;}
+    .float-card{position:absolute; padding:1.2rem 1.4rem; font-size:.85rem; max-width:230px;}
+
+    .catalog-bar{display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; align-items:center; margin-bottom:1.25rem;}
+    .filters{display:flex; flex-wrap:wrap; gap:.5rem;}
+    .chip{background:transparent; border:1px solid var(--line); border-radius:4px; padding:.55rem 1.1rem; font-size:.82rem; letter-spacing:.08em; text-transform:uppercase; transition:background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);}
+    .chip:hover{transform:translateY(-2px); border-color:var(--emerald);}
+    .chip.active{background:var(--emerald); color:var(--ivory); border-color:var(--emerald);}
+    .search input{padding:.7rem 1rem; border:1px solid var(--line); border-radius:4px; background:#fff; font:inherit; min-width:240px;}
+    .search input:focus{outline:none; border-color:var(--emerald); box-shadow:0 0 0 3px rgba(31,74,56,.12);}
+    .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);}
+    .crop-card{transition:transform .45s var(--ease), box-shadow .45s var(--ease), opacity .35s var(--ease), border-color .45s var(--ease);}
+    .crop-card.hide{display:none;}
+    .empty{padding:2rem 0;}
+
+  </style>
+</head>
+<body>
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="Farm &amp; Agriculture home">
+        <span class="logo" aria-hidden="true"><img src="images/logo-white.png" alt="Stackly" style="height:51px;width:auto;display:block" loading="lazy"></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Farming Services</a></li>
+            <li><a href="crops.html" aria-current="page">Crops &amp; Products</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+      <a class="nav-cta" href="login.html">Login</a>
+      <button class="burger" id="menuOpen" type="button" aria-label="Open menu"><span></span></button>
+    </div>
+  </header>
+
+  <!-- ===================== MOBILE MENU ===================== -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="mm-top">
+      <a class="brand" href="index.html">
+        <span class="logo" aria-hidden="true"><img src="images/logo-white.png" alt="Stackly" style="height:46px;width:auto;display:block" loading="lazy"></span>
+      </a>
+      <button class="menu-close" id="menuClose" type="button" aria-label="Close menu">&#10005;</button>
+    </div>
+    <nav aria-label="Mobile navigation links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="services.html">Farming Services</a>
+          <a href="crops.html" aria-current="page">Crops &amp; Products</a>
+          <a href="contact.html">Contact Us</a>
+      <a class="btn btn--gold" href="login.html">Login <span class="arrow">&#8594;</span></a>
+    </nav>
+  </div>
+
+  <section class="page-hero">
+    <img src="images/veg.webp" width="1100" height="825" alt="Fresh harvested vegetables in crates">
+    <div class="wrap">
+      <p class="crumbs"><a href="index.html">Home</a> / Crops &amp; Products</p>
+      <h1>A Catalogue Grown,<br>Not Assembled.</h1>
+      <p class="lead" style="color:rgba(244,240,230,.82)">Forty-plus varieties across cereals, vegetables, fruits, pulses and certified organic produce — each traceable to a plot and a date.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="catalog-bar reveal">
+        <div class="filters" role="group" aria-label="Filter crops by category">
+          <button class="chip active" type="button" data-filter="All">All</button>
+          <button class="chip" type="button" data-filter="Cereals">Cereals</button>
+          <button class="chip" type="button" data-filter="Vegetables">Vegetables</button>
+          <button class="chip" type="button" data-filter="Fruits">Fruits</button>
+          <button class="chip" type="button" data-filter="Pulses">Pulses</button>
+          <button class="chip" type="button" data-filter="Organic">Organic</button>
+          <button class="chip" type="button" data-filter="Seasonal">Seasonal</button>
+        </div>
+        <div class="search">
+          <label class="visually-hidden" for="cropSearch">Search crops</label>
+          <input id="cropSearch" type="search" placeholder="Search crops, e.g. wheat">
+        </div>
+      </div>
+      <p class="muted" id="cropCount" aria-live="polite"></p>
+      <div class="grid g3" id="cropGrid">
+          <article class="crop-card card reveal" data-cat="Cereals" data-name="basmati rice">
+            <div class="media"><img src="images/rice.webp" width="1100" height="825" loading="lazy" alt="Basmati Rice cultivated at our farms"></div>
+            <div class="crop-body">
+              <span class="tag">Cereals</span>
+              <h3>Basmati Rice</h3>
+              <p class="muted">Long-grain aromatic paddy from terraced, water-balanced fields.</p>
+              <div class="crop-foot">
+                <small>Harvest · Oct – Nov</small>
+                <span class="more">View details <span class="arrow">&#8594;</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="crop-card card reveal" data-cat="Cereals" data-name="sharbati wheat">
+            <div class="media"><img src="images/wheat.webp" width="1100" height="825" loading="lazy" alt="Sharbati Wheat cultivated at our farms"></div>
+            <div class="crop-body">
+              <span class="tag">Cereals</span>
+              <h3>Sharbati Wheat</h3>
+              <p class="muted">High-protein wheat grown on rested, rotation-fed soil.</p>
+              <div class="crop-foot">
+                <small>Harvest · Mar – Apr</small>
+                <span class="more">View details <span class="arrow">&#8594;</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="crop-card card reveal" data-cat="Vegetables" data-name="seasonal vegetables">
+            <div class="media"><img src="images/veg.webp" width="1100" height="825" loading="lazy" alt="Seasonal Vegetables cultivated at our farms"></div>
+            <div class="crop-body">
+              <span class="tag">Vegetables</span>
+              <h3>Seasonal Vegetables</h3>
+              <p class="muted">Daily-harvest greens, roots and gourds graded at source.</p>
+              <div class="crop-foot">
+                <small>Harvest · Year round</small>
+                <span class="more">View details <span class="arrow">&#8594;</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="crop-card card reveal" data-cat="Vegetables" data-name="protected tomatoes">
+            <div class="media"><img src="images/greenhouse.webp" width="1100" height="825" loading="lazy" alt="Protected Tomatoes cultivated at our farms"></div>
+            <div class="crop-body">
+              <span class="tag">Vegetables</span>
+              <h3>Protected Tomatoes</h3>
+              <p class="muted">Greenhouse tomatoes with consistent grade and shelf life.</p>
+              <div class="crop-foot">
+                <small>Harvest · Year round</small>
+                <span class="more">View details <span class="arrow">&#8594;</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="crop-card card reveal" data-cat="Fruits" data-name="orchard mangoes">
+            <div class="media"><img src="images/fruits.webp" width="1100" height="825" loading="lazy" alt="Orchard Mangoes cultivated at our farms"></div>
+            <div class="crop-body">
+              <span class="tag">Fruits</span>
+              <h3>Orchard Mangoes</h3>
+              <p class="muted">Hand-picked Kesar and Alphonso from mature orchards.</p>
+              <div class="crop-foot">
+                <small>Harvest · Apr – Jun</small>
+                <span class="more">View details <span class="arrow">&#8594;</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="crop-card card reveal" data-cat="Fruits" data-name="pomegranate">
+            <div class="media"><img src="images/fruits.webp" width="1100" height="825" loading="lazy" alt="Pomegranate cultivated at our farms"></div>
+            <div class="crop-body">
+              <span class="tag">Fruits</span>
+              <h3>Pomegranate</h3>
+              <p class="muted">Deep-aril, export-grade fruit from drip-fed blocks.</p>
+              <div class="crop-foot">
+                <small>Harvest · Aug – Oct</small>
+                <span class="more">View details <span class="arrow">&#8594;</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="crop-card card reveal" data-cat="Pulses" data-name="red lentils">
+            <div class="media"><img src="images/pulses.webp" width="1100" height="825" loading="lazy" alt="Red Lentils cultivated at our farms"></div>
+            <div class="crop-body">
+              <span class="tag">Pulses</span>
+              <h3>Red Lentils</h3>
+              <p class="muted">Nitrogen-fixing masoor cleaned and colour sorted.</p>
+              <div class="crop-foot">
+                <small>Harvest · Feb – Mar</small>
+                <span class="more">View details <span class="arrow">&#8594;</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="crop-card card reveal" data-cat="Pulses" data-name="chickpeas">
+            <div class="media"><img src="images/pulses.webp" width="1100" height="825" loading="lazy" alt="Chickpeas cultivated at our farms"></div>
+            <div class="crop-body">
+              <span class="tag">Pulses</span>
+              <h3>Chickpeas</h3>
+              <p class="muted">Bold-grade chana from cool-season rotations.</p>
+              <div class="crop-foot">
+                <small>Harvest · Feb – Mar</small>
+                <span class="more">View details <span class="arrow">&#8594;</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="crop-card card reveal" data-cat="Organic" data-name="organic leafy greens">
+            <div class="media"><img src="images/soil.webp" width="1100" height="825" loading="lazy" alt="Organic Leafy Greens cultivated at our farms"></div>
+            <div class="crop-body">
+              <span class="tag">Organic</span>
+              <h3>Organic Leafy Greens</h3>
+              <p class="muted">Certified organic spinach, methi and lettuce.</p>
+              <div class="crop-foot">
+                <small>Harvest · Year round</small>
+                <span class="more">View details <span class="arrow">&#8594;</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="crop-card card reveal" data-cat="Organic" data-name="organic root crops">
+            <div class="media"><img src="images/irrigation.webp" width="1100" height="825" loading="lazy" alt="Organic Root Crops cultivated at our farms"></div>
+            <div class="crop-body">
+              <span class="tag">Organic</span>
+              <h3>Organic Root Crops</h3>
+              <p class="muted">Carrots and beetroot grown fully without synthetics.</p>
+              <div class="crop-foot">
+                <small>Harvest · Nov – Feb</small>
+                <span class="more">View details <span class="arrow">&#8594;</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="crop-card card reveal" data-cat="Seasonal" data-name="monsoon maize">
+            <div class="media"><img src="images/harvest.webp" width="1100" height="825" loading="lazy" alt="Monsoon Maize cultivated at our farms"></div>
+            <div class="crop-body">
+              <span class="tag">Seasonal</span>
+              <h3>Monsoon Maize</h3>
+              <p class="muted">Kharif maize for feed and starch buyers.</p>
+              <div class="crop-foot">
+                <small>Harvest · Sep – Oct</small>
+                <span class="more">View details <span class="arrow">&#8594;</span></span>
+              </div>
+            </div>
+          </article>
+          <article class="crop-card card reveal" data-cat="Seasonal" data-name="winter millets">
+            <div class="media"><img src="images/hero.webp" width="1100" height="825" loading="lazy" alt="Winter Millets cultivated at our farms"></div>
+            <div class="crop-body">
+              <span class="tag">Seasonal</span>
+              <h3>Winter Millets</h3>
+              <p class="muted">Drought-tolerant jowar and bajra for dryland plots.</p>
+              <div class="crop-foot">
+                <small>Harvest · Dec – Jan</small>
+                <span class="more">View details <span class="arrow">&#8594;</span></span>
+              </div>
+            </div>
+          </article>
+      </div>
+      <p class="empty muted" id="cropEmpty" hidden>No crops match that search yet — try another variety or category.</p>
+    </div>
+  </section>
+
+  <section class="section section--deep">
+    <div class="wrap split">
+      <div class="reveal">
+        <span class="eyebrow">Quality &amp; traceability</span>
+        <h2>Every Lot Carries Its Own History.</h2>
+        <p class="lead">Grading happens within hours of picking. Each crate is tagged with plot, date, variety and handler, so a buyer question never becomes guesswork.</p>
+        <div class="grid g2" style="margin-top:1.5rem">
+          <div class="card reveal"><h3>Cold chain</h3><p class="muted">Pre-cooling within four hours of harvest.</p></div>
+          <div class="card reveal"><h3>Residue checks</h3><p class="muted">Batch sampling before every dispatch.</p></div>
+        </div>
+      </div>
+      <div class="media media--tall reveal"><img src="images/harvest.webp" width="1100" height="619" loading="lazy" alt="Harvester at work in a golden field"></div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <img src="images/fruits.webp" width="1100" height="825" loading="lazy" alt="Baskets of orchard fruit">
+    <div class="wrap"><div class="glass cta-panel reveal">
+      <h2>Need Volumes or Samples?</h2>
+      <p class="lead">Tell us the variety, grade and window — we'll confirm availability from the current season's plan.</p>
+      <a class="btn btn--gold" href="contact.html">Request availability <span class="arrow">&#8594;</span></a>
+    </div></div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="index.html">
+        <span class="logo" aria-hidden="true"><img src="images/logo-white.png" alt="Stackly" style="height:49px;width:auto;display:block" loading="lazy"></span>
+          </a>
+          <p class="muted">A modern agricultural collective cultivating 1,500+ acres with sustainable practice, smart technology and deep respect for the land and the people who work it.</p>
+          
+        <div class="socials">
+          <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5h1.65V4.6C16.4 4.55 15.4 4.5 14.3 4.5c-2.4 0-4 1.45-4 4.1v2.3H7.6V14h2.7v8z"/></svg></a>
+          <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.37 1.06.42 2.23.06 1.25.07 1.62.07 4.8s0 3.55-.07 4.8c-.05 1.17-.25 1.8-.42 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.17-1.06.37-2.23.42-1.25.06-1.62.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.42-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.17-.42-.37-1.06-.42-2.23C2.2 15.55 2.2 15.18 2.2 12s0-3.55.07-4.8c.05-1.17.25-1.8.42-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.06-.37 2.23-.42C8.45 2.2 8.82 2.2 12 2.2zm0 3.3a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zm0 10.72a4.22 4.22 0 1 1 0-8.44 4.22 4.22 0 0 1 0 8.44zM19.1 5.6a1.52 1.52 0 1 1-3.04 0 1.52 1.52 0 0 1 3.04 0z"/></svg></a>
+          <a href="https://x.com" aria-label="X" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.5 3h3.2l-7 8 8.2 10h-6.4l-5-6.1L4.7 21H1.5l7.5-8.6L1.2 3h6.6l4.5 5.6zm-1.1 16.2h1.8L7.7 4.7H5.8z"/></svg></a>
+          <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M6.94 5.5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0zM3.3 8.9h3.3V21H3.3zM9.4 8.9h3.16v1.65h.05c.44-.8 1.5-1.65 3.1-1.65 3.3 0 3.9 2.1 3.9 4.9V21h-3.3v-5.5c0-1.3 0-3-1.85-3s-2.13 1.42-2.13 2.9V21H9.4z"/></svg></a>
+        </div>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Farming Services</a></li>
+            <li><a href="crops.html">Crops &amp; Products</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Related</h4>
+          <ul>
+            <li><a href="services.html">Sustainable Farming</a></li>
+            <li><a href="services.html">Smart Agriculture</a></li>
+            <li><a href="crops.html">Organic Practices</a></li>
+            <li><a href="crops.html">Crop Knowledge</a></li>
+            <li><a href="about.html">Farmer Community</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li>Survey No. 42, Green Valley Road,<br>Nashik, Maharashtra 422003</li>
+            <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+            <li><a href="mailto:hello@farmagriculture.in">hello@farmagriculture.in</a></li>
+            <li>Mon – Sat, 8:00 AM – 6:30 PM</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Farm &amp; Agriculture. All rights reserved.</span>
+        <span><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Use</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== INTERNAL SCRIPT ===================== -->
+  <script>
+  (function(){
+    "use strict";
+
+    /* ---------- Sticky header state ---------- */
+    var header = document.querySelector('.site-header');
+    function onScroll(){
+      if(!header) return;
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }
+    window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
+
+    /* ---------- Mobile navigation drawer ---------- */
+    var drawer = document.getElementById('mobileMenu');
+    var openBtn = document.getElementById('menuOpen');
+    var closeBtn = document.getElementById('menuClose');
+    function openMenu(){ if(!drawer) return; drawer.classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeMenu(){ if(!drawer) return; drawer.classList.remove('open'); document.body.style.overflow=''; }
+    if(openBtn) openBtn.addEventListener('click', openMenu);
+    if(closeBtn) closeBtn.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
+    if(drawer) drawer.addEventListener('click', function(e){ if(e.target === drawer) closeMenu(); });
+
+    /* ---------- Scroll reveal ---------- */
+    var revealables = document.querySelectorAll('.reveal');
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){ entry.target.classList.add('visible'); io.unobserve(entry.target); }
+        });
+      }, { threshold:.16 });
+      revealables.forEach(function(el){ io.observe(el); });
+    } else {
+      revealables.forEach(function(el){ el.classList.add('visible'); });
+    }
+
+    /* ---------- Animated counters ---------- */
+    var counters = document.querySelectorAll('[data-count]');
+    function runCounter(el){
+      var target = parseFloat(el.getAttribute('data-count'));
+      var started = null;
+      function step(now){
+        if(!started) started = now;
+        var progress = Math.min((now - started) / 1600, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased).toLocaleString('en-IN');
+        if(progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    if(counters.length && 'IntersectionObserver' in window){
+      var co = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){ runCounter(entry.target); co.unobserve(entry.target); }
+        });
+      }, { threshold:.5 });
+      counters.forEach(function(el){ co.observe(el); });
+    } else {
+      counters.forEach(function(el){ el.textContent = el.getAttribute('data-count'); });
+    }
+
+    /* ---------- Toast notifications (no alert() anywhere) ---------- */
+    function toast(message, type){
+      var stack = document.querySelector('.toast-stack');
+      if(!stack){
+        stack = document.createElement('div');
+        stack.className = 'toast-stack';
+        document.body.appendChild(stack);
+      }
+      var el = document.createElement('div');
+      el.className = 'toast' + (type === 'error' ? ' error' : '');
+      el.setAttribute('role','status');
+      el.textContent = message;
+      stack.appendChild(el);
+      requestAnimationFrame(function(){ el.classList.add('show'); });
+      setTimeout(function(){
+        el.classList.remove('show');
+        setTimeout(function(){ el.remove(); }, 400);
+      }, 3600);
+    }
+    window.toast = toast;
+
+    /* ---- category filter + live search ---- */
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.crop-card'));
+    var chips = document.querySelectorAll('.chip');
+    var searchBox = document.getElementById('cropSearch');
+    var countEl = document.getElementById('cropCount');
+    var emptyEl = document.getElementById('cropEmpty');
+    var activeCat = 'All';
+
+    function applyFilters(){
+      var q = (searchBox && searchBox.value || '').trim().toLowerCase();
+      var shown = 0;
+      cards.forEach(function(card){
+        var matchCat = activeCat === 'All' || card.getAttribute('data-cat') === activeCat;
+        var matchText = !q || card.getAttribute('data-name').indexOf(q) > -1 || card.getAttribute('data-cat').toLowerCase().indexOf(q) > -1;
+        var show = matchCat && matchText;
+        card.classList.toggle('hide', !show);
+        if(show){ shown++; card.classList.add('visible'); }
+      });
+      if(countEl) countEl.textContent = 'Showing ' + shown + ' of ' + cards.length + ' crops';
+      if(emptyEl) emptyEl.hidden = shown !== 0;
+    }
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        chips.forEach(function(c){ c.classList.remove('active'); });
+        chip.classList.add('active');
+        activeCat = chip.getAttribute('data-filter');
+        applyFilters();
+      });
+    });
+    if(searchBox) searchBox.addEventListener('input', applyFilters);
+    applyFilters();
+
+    /* ---- crop detail feedback ---- */
+    cards.forEach(function(card){
+      card.addEventListener('click', function(){
+        var name = card.querySelector('h3').textContent;
+        toast(name + ' — current season availability sent on request.');
+      });
+    });
+
+  })();
+  </script>
+</body>
+</html>

@@ -33,7 +33,7 @@
 
     /* ============ RESET ============ */
     *,*::before,*::after{box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
+    html{scroll-behavior:smooth; overflow-x:hidden; font-size:100%; -webkit-text-size-adjust:100%;}
     body{
       margin:0; background:var(--ivory); color:var(--charcoal);
       font-family:var(--sans); font-size:16px; line-height:1.7;
@@ -281,6 +281,22 @@
     .kpi .trend{font-size:.8rem; color:var(--moss); margin-top:.5rem;}
     table{width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:var(--r); overflow:hidden; font-size:.9rem;}
     th,td{padding:.85rem 1rem; text-align:left; border-bottom:1px solid var(--line);}
+    /* Responsive tables: scroll sideways on small screens so all columns stay reachable */
+    .table-scroll{
+      width:100%; max-width:100%; overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain;
+      background:#fff; border:1px solid var(--line); border-radius:var(--r); scrollbar-width:thin; scrollbar-color:var(--sage) transparent;
+      background:
+        linear-gradient(to right,#fff 30%,rgba(255,255,255,0)) left center/34px 100% no-repeat local,
+        linear-gradient(to left,#fff 30%,rgba(255,255,255,0)) right center/34px 100% no-repeat local,
+        radial-gradient(farthest-side at 0 50%,rgba(32,37,31,.22),rgba(32,37,31,0)) left center/12px 100% no-repeat scroll,
+        radial-gradient(farthest-side at 100% 50%,rgba(32,37,31,.22),rgba(32,37,31,0)) right center/12px 100% no-repeat scroll,
+        #fff;
+    }
+    .table-scroll::-webkit-scrollbar{height:6px;}
+    .table-scroll::-webkit-scrollbar-thumb{background:var(--sage); border-radius:99px;}
+    .table-scroll table{border:0; border-radius:0; min-width:540px; width:100%; background:transparent;}
+    .table-scroll th,.table-scroll td{white-space:nowrap;}
+    .dash-main,.dash-body,.panel,.two > *,.card{min-width:0;}
     th{background:var(--beige); font-size:.75rem; letter-spacing:.14em; text-transform:uppercase;}
     tbody tr{transition:background .3s var(--ease);}
     tbody tr:hover{background:rgba(31,74,56,.05);}
@@ -316,7 +332,7 @@
     <aside class="sidebar" aria-label="Dashboard navigation">
       <div style="display:flex; align-items:center; justify-content:space-between; gap:.5rem">
         <a class="brand" href="index.html">
-        <span class="logo" aria-hidden="true"><img src="images/logo-white.png" alt="Stackly" style="height:43px;width:auto;display:block" loading="lazy"></span>
+        <span class="logo" aria-hidden="true"><img src="./images/stackly-logo-white (1).webp" alt="Stackly" style="height:38px;width:auto;display:block" loading="lazy"></span>
         </a>
         <button class="side-close" id="sideClose" type="button" aria-label="Close navigation">&#10005;</button>
       </div>
@@ -385,7 +401,7 @@
         <!-- ---- FARMS ---- -->
         <section class="panel" id="p-farms">
           <h2>Farms</h2>
-          <table>
+          <div class="table-scroll"><table>
             <thead><tr><th>Cluster</th><th>Acres</th><th>Primary crop</th><th>Health</th></tr></thead>
             <tbody>
               <tr><td>Sinnar</td><td>420</td><td>Rice</td><td>Excellent</td></tr>
@@ -393,13 +409,13 @@
               <tr><td>Dindori</td><td>388</td><td>Wheat</td><td>Excellent</td></tr>
               <tr><td>Satara</td><td>402</td><td>Pulses</td><td>Watch</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </section>
 
         <!-- ---- CROPS ---- -->
         <section class="panel" id="p-crops">
           <h2>Crops</h2>
-          <table>
+          <div class="table-scroll"><table>
             <thead><tr><th>Crop</th><th>Plots</th><th>Stage</th><th>Harvest window</th></tr></thead>
             <tbody>
               <tr><td>Basmati Rice</td><td>18</td><td>Grain fill</td><td>Oct – Nov</td></tr>
@@ -407,13 +423,13 @@
               <tr><td>Tomato (protected)</td><td>6</td><td>Harvesting</td><td>Year round</td></tr>
               <tr><td>Chickpea</td><td>11</td><td>Pod set</td><td>Feb – Mar</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </section>
 
         <!-- ---- FARMERS ---- -->
         <section class="panel" id="p-farmers">
           <h2>Farmers</h2>
-          <table>
+          <div class="table-scroll"><table>
             <thead><tr><th>Name</th><th>Village</th><th>Acres</th><th>Status</th></tr></thead>
             <tbody>
               <tr><td>Rameshwar Patil</td><td>Sinnar</td><td>9</td><td>Active</td></tr>
@@ -421,7 +437,7 @@
               <tr><td>Imran Shaikh</td><td>Igatpuri</td><td>12</td><td>Active</td></tr>
               <tr><td>Kavita More</td><td>Satara</td><td>4</td><td>Onboarding</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </section>
 
         <!-- ---- IRRIGATION ---- -->
@@ -430,14 +446,14 @@
           <div class="kpi"><div class="card"><b>2.8M L</b><span>Used this month</span><div class="trend">-14%</div></div><div class="card"><b>88%</b><span>Drip coverage</span><div class="trend">+4%</div></div><div class="card"><b>62%</b><span>Avg soil moisture</span><div class="trend">Optimal</div></div><div class="card"><b>3</b><span>Alerts open</span><div class="trend">1 critical</div></div></div>
           <div class="card">
             <h3>Cluster schedule</h3>
-            <table>
+            <div class="table-scroll"><table>
               <thead><tr><th>Cluster</th><th>Next cycle</th><th>Duration</th><th>Mode</th></tr></thead>
               <tbody>
                 <tr><td>Sinnar</td><td>Today · 17:30</td><td>45 min</td><td>Sensor</td></tr>
                 <tr><td>Dindori</td><td>Tomorrow · 06:00</td><td>60 min</td><td>Sensor</td></tr>
                 <tr><td>Satara</td><td>Tomorrow · 17:00</td><td>40 min</td><td>Manual</td></tr>
               </tbody>
-            </table>
+            </table></div>
           </div>
         </section>
 

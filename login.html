@@ -259,9 +259,38 @@
     .auth-visual::after{content:""; position:absolute; inset:0; background:linear-gradient(160deg,rgba(22,53,42,.92),rgba(32,37,31,.6));}
     .auth-visual-inner{position:sticky; top:0; z-index:2; height:100vh; display:flex; flex-direction:column; justify-content:space-between; padding:clamp(1.8rem,4vw,3.2rem); overflow:hidden;}
     .mini-cards{display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.8rem;}
-    .mini{padding:1rem 1.2rem;}
-    .mini b{display:block; font-family:var(--serif); font-size:1.4rem; color:var(--gold);}
-    .mini span{font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; opacity:.85;}
+    .mini{
+      padding:1rem 1.2rem;
+      cursor:default;
+      transition:
+        transform .4s var(--ease),
+        background .4s var(--ease),
+        border-color .4s var(--ease),
+        box-shadow .4s var(--ease);
+    }
+    .mini b{
+      display:block;
+      font-family:var(--serif);
+      font-size:1.4rem;
+      color:var(--gold);
+      transition:color .35s var(--ease);
+    }
+    .mini span{
+      font-size:.72rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      opacity:.85;
+    }
+    /* Mini stat hover */
+    .mini:hover{
+      transform:translateY(-7px);
+      background:rgba(199,165,91,.14);
+      border-color:rgba(199,165,91,.65);
+      box-shadow:0 18px 35px -20px rgba(0,0,0,.7);
+    }
+    .mini:hover b{
+      color:#fff;
+    }
     .auth-panel{background:var(--ivory); max-height:100vh; overflow-y:auto;}
     .auth-inner{width:min(100% - 2.5rem,440px); margin-inline:auto; padding:clamp(2rem,5vw,3.5rem) 0;}
     .brand--dark{color:var(--charcoal);}
@@ -395,7 +424,7 @@
           
           <div class="or-divider"><span>or continue with</span></div>
           <div class="social-row">
-            <button  onclick="window.location.href='404.html';" type="button" aria-label="Continue with Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5h1.65V4.6C16.4 4.55 15.4 4.5 14.3 4.5c-2.4 0-4 1.45-4 4.1v2.3H7.6V14h2.7v8z"/></svg></button>
+            <button onclick="window.location.href='404.html';" type="button" aria-label="Continue with Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5h1.65V4.6C16.4 4.55 15.4 4.5 14.3 4.5c-2.4 0-4 1.45-4 4.1v2.3H7.6V14h2.7v8z"/></svg></button>
             <button onclick="window.location.href='404.html';" type="button" aria-label="Continue with Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.37 1.06.42 2.23.06 1.25.07 1.62.07 4.8s0 3.55-.07 4.8c-.05 1.17-.25 1.8-.42 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.17-1.06.37-2.23.42-1.25.06-1.62.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.42-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.17-.42-.37-1.06-.42-2.23C2.2 15.55 2.2 15.18 2.2 12s0-3.55.07-4.8c.05-1.17.25-1.8.42-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.06-.37 2.23-.42C8.45 2.2 8.82 2.2 12 2.2zm0 3.3a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zm0 10.72a4.22 4.22 0 1 1 0-8.44 4.22 4.22 0 0 1 0 8.44zM19.1 5.6a1.52 1.52 0 1 1-3.04 0 1.52 1.52 0 0 1 3.04 0z"/></svg></button>
             <button onclick="window.location.href='404.html';" type="button" aria-label="Continue with X"><svg viewBox="0 0 24 24"><path d="M17.5 3h3.2l-7 8 8.2 10h-6.4l-5-6.1L4.7 21H1.5l7.5-8.6L1.2 3h6.6l4.5 5.6zm-1.1 16.2h1.8L7.7 4.7H5.8z"/></svg></button>
             <button onclick="window.location.href='404.html';" type="button" aria-label="Continue with LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.94 5.5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0zM3.3 8.9h3.3V21H3.3zM9.4 8.9h3.16v1.65h.05c.44-.8 1.5-1.65 3.1-1.65 3.3 0 3.9 2.1 3.9 4.9V21h-3.3v-5.5c0-1.3 0-3-1.85-3s-2.13 1.42-2.13 2.9V21H9.4z"/></svg></button>
@@ -450,7 +479,7 @@
           <div class="social-row">
             <button onclick="window.location.href='404.html';" type="button" aria-label="Continue with Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5h1.65V4.6C16.4 4.55 15.4 4.5 14.3 4.5c-2.4 0-4 1.45-4 4.1v2.3H7.6V14h2.7v8z"/></svg></button>
             <button onclick="window.location.href='404.html';" type="button" aria-label="Continue with Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.37 1.06.42 2.23.06 1.25.07 1.62.07 4.8s0 3.55-.07 4.8c-.05 1.17-.25 1.8-.42 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.17-1.06.37-2.23.42-1.25.06-1.62.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.42-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.17-.42-.37-1.06-.42-2.23C2.2 15.55 2.2 15.18 2.2 12s0-3.55.07-4.8c.05-1.17.25-1.8.42-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.06-.37 2.23-.42C8.45 2.2 8.82 2.2 12 2.2zm0 3.3a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zm0 10.72a4.22 4.22 0 1 1 0-8.44 4.22 4.22 0 0 1 0 8.44zM19.1 5.6a1.52 1.52 0 1 1-3.04 0 1.52 1.52 0 0 1 3.04 0z"/></svg></button>
-            <button onclick="window.location.href='404.html';"type="button" aria-label="Continue with X"><svg viewBox="0 0 24 24"><path d="M17.5 3h3.2l-7 8 8.2 10h-6.4l-5-6.1L4.7 21H1.5l7.5-8.6L1.2 3h6.6l4.5 5.6zm-1.1 16.2h1.8L7.7 4.7H5.8z"/></svg></button>
+            <button onclick="window.location.href='404.html';" type="button" aria-label="Continue with X"><svg viewBox="0 0 24 24"><path d="M17.5 3h3.2l-7 8 8.2 10h-6.4l-5-6.1L4.7 21H1.5l7.5-8.6L1.2 3h6.6l4.5 5.6zm-1.1 16.2h1.8L7.7 4.7H5.8z"/></svg></button>
             <button onclick="window.location.href='404.html';" type="button" aria-label="Continue with LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.94 5.5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0zM3.3 8.9h3.3V21H3.3zM9.4 8.9h3.16v1.65h.05c.44-.8 1.5-1.65 3.1-1.65 3.3 0 3.9 2.1 3.9 4.9V21h-3.3v-5.5c0-1.3 0-3-1.85-3s-2.13 1.42-2.13 2.9V21H9.4z"/></svg></button>
           </div>
         </form>
@@ -624,10 +653,6 @@
       }, 900);
     });
 
-    document.getElementById('forgot').addEventListener('click', function(){
-      toast('Password reset link sent to your registered email.');
-    });
-
     /* ---------- SIGN UP ---------- */
     var sName = document.getElementById('sName');
     var sEmail = document.getElementById('sEmail');
@@ -654,19 +679,15 @@
       toast('Account created. Please log in to continue.');
       setTimeout(function(){
         signupForm.reset();
-        document.querySelectorAll('.role[data-group="signup"]').forEach(function(r){ r.classList.remove('selected'); });
+        document.querySelectorAll('.role[data-group="signup"]').forEach(function(r){
+          r.classList.remove('selected');
+          r.setAttribute('aria-checked','false');
+        });
         chosen.signup = '';
         signupBtn.classList.remove('loading');
         signupBtn.innerHTML = 'Create Account <span class="arrow">&#8594;</span>';
         showLogin();
       }, 1100);
-    });
-
-    /* ---------- social buttons give feedback ---------- */
-    document.querySelectorAll('.social-row button').forEach(function(b){
-      b.addEventListener('click', function(){
-        toast('Social sign-in is not connected in this demo build.');
-      });
     });
 
   })();
